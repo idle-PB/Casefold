@@ -1571,14 +1571,16 @@ Module CaseFolding
     bb = casemapping(mode,upb) 
     
     While (aa & $ffff) = (bb & $FFFF)
-      
+          
       If mode = #CASEFULL
         If aa > $FFFF  
           While (((aa & $ffff) = Casemapping(mode,*b\a[cb])) And *b\a[cb] <> 0) 
             aa >> 16 
             cb+1 
           Wend  
-          cb-1         
+          If cb > 0 
+            cb-1 
+          EndIf   
         EndIf  
         
         If bb > $FFFF 
@@ -1586,7 +1588,9 @@ Module CaseFolding
             bb >> 16 
             ca+1 
           Wend  
-          ca-1     
+          If ca > 0 
+            ca-1
+          EndIf   
         EndIf 
       EndIf 
       
@@ -1682,7 +1686,9 @@ Module CaseFolding
             aa >> 16 
             cb+1 
           Wend  
-          cb-1         
+          If cb > 0 
+            cb-1 
+          EndIf   
         EndIf  
         
         If bb > $FFFF 
@@ -1690,7 +1696,9 @@ Module CaseFolding
             bb >> 16 
             ca+1 
           Wend  
-          ca-1     
+          If ca > 0 
+            ca-1
+          EndIf   
         EndIf 
       EndIf 
       
@@ -1789,6 +1797,8 @@ CompilerIf #PB_Compiler_IsMainFile
     
     Global sa.s,sb.s 
     
+    StrCmp(_Chr($00DF), _Chr($1E9E))
+    
     Debug StrCmp("ß", "ss")   ; returns `1`
     Debug StrCmp("ßz", "ssz") ; returns `1`
     Debug StrCmp("zß", "zss") ; returns `1`
@@ -1866,11 +1876,10 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 6.00 LTS (Windows - x64)
-; CursorPosition = 1843
-; FirstLine = 1796
+; CursorPosition = 1702
+; FirstLine = 1658
 ; Folding = ---
 ; Optimizer
 ; EnableXP
 ; DPIAware
-; DisableDebugger
-; Compiler = PureBasic 6.00 LTS (Windows - x64)
+; Compiler = PureBasic 6.00 LTS - C Backend (Windows - x64)
