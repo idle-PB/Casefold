@@ -26,6 +26,7 @@
   ;       added _chr() _ asc() functions for surrogate pairs 
   ;v1.2.7 fixed bug in _asc function 
   ;v1.2.8 fixed short string bug 
+  ;v1.2.9 fixec bug in same case mapping 1st char
   
   Structure mappings 
     code.l
@@ -1574,7 +1575,7 @@ Module CaseFolding
           
       If mode = #CASEFULL
         If aa > $FFFF  
-          While (((aa & $ffff) = Casemapping(mode,*b\a[cb])) And *b\a[cb] <> 0) 
+          While (((aa & $ffff) = Casemapping(mode,*b\a[cb]) & $ffff) And *b\a[cb] <> 0) 
             aa >> 16 
             cb+1 
           Wend  
@@ -1584,7 +1585,7 @@ Module CaseFolding
         EndIf  
         
         If bb > $FFFF 
-          While (((bb & $ffff) = Casemapping(mode,*a\a[ca])) And *a\a[cb] <> 0) 
+          While (((bb & $ffff) = Casemapping(mode,*a\a[ca]) & $ffff) And *a\a[cb] <> 0) 
             bb >> 16 
             ca+1 
           Wend  
@@ -1682,7 +1683,7 @@ Module CaseFolding
       
       If mode = #CASEFULL
         If aa > $FFFF  
-          While (((aa & $ffff) = Casemapping(mode,*b\a[cb])) And *b\a[cb] <> 0) 
+          While (((aa & $ffff) = Casemapping(mode,*b\a[cb]) & $ffff) And *b\a[cb] <> 0) 
             aa >> 16 
             cb+1 
           Wend  
@@ -1692,7 +1693,7 @@ Module CaseFolding
         EndIf  
         
         If bb > $FFFF 
-          While (((bb & $ffff) = Casemapping(mode,*a\a[ca])) And *a\a[cb] <> 0) 
+          While (((bb & $ffff) = Casemapping(mode,*a\a[ca]) & $ffff) And *a\a[cb] <> 0) 
             bb >> 16 
             ca+1 
           Wend  
@@ -1797,8 +1798,7 @@ CompilerIf #PB_Compiler_IsMainFile
     
     Global sa.s,sb.s 
     
-    StrCmp(_Chr($00DF), _Chr($1E9E))
-    
+    Debug StrCmp(_Chr($00DF), _Chr($1E9E)) ; returns 1
     Debug StrCmp("ß", "ss")   ; returns `1`
     Debug StrCmp("ßz", "ssz") ; returns `1`
     Debug StrCmp("zß", "zss") ; returns `1`
@@ -1810,6 +1810,14 @@ CompilerIf #PB_Compiler_IsMainFile
     If StrCmp(sa,sb) 
       Debug "surrogate pairs " + sa + " = " + sb  
     EndIf   
+    
+    sa = "a" + _Chr($00DF) + "abd" 
+    sb = "a" + _Chr($1E9E) + "ABD" 
+    
+    If StrCmp(sa,sb) 
+      Debug "casemapping " + sa + " = " + sb  
+    EndIf   
+       
     
     Global s2.s =  "aSSEai"+Chr($0307)+"dßf"    ;these strings are deemed to be equal with full case folding 
     Global s1.s =  "aßEaİdssf"
@@ -1876,8 +1884,8 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 6.00 LTS (Windows - x64)
-; CursorPosition = 1702
-; FirstLine = 1658
+; CursorPosition = 1819
+; FirstLine = 1782
 ; Folding = ---
 ; Optimizer
 ; EnableXP
