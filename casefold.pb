@@ -1,5 +1,5 @@
 ﻿DeclareModule CaseFolding 
-  ;casefold.pb v 1.2.8 
+  ;casefold.pb v 1.2.9 
   ;author idle 15/11/22 
   ;license MIT 
   ;Unicode full case folding case insensitive string matching.  
@@ -1808,7 +1808,7 @@ CompilerIf #PB_Compiler_IsMainFile
     ;1FF3; F; 03C9 03B9; # GREEK SMALL LETTER OMEGA WITH YPOGEGRAMMENI
         
     If StrCmp(sa,sb) 
-      Debug "casemapping " + sa + " = " + sb  
+      Debug "case mapping " + sa + " = " + sb  
     EndIf   
         
     Global s2.s =  "aSSEai"+Chr($0307)+"dßf"    ;these strings are deemed to be equal with full case folding 
@@ -1875,11 +1875,11 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 
-; IDE Options = PureBasic 6.00 LTS (Windows - x64)
-; CursorPosition = 1813
-; FirstLine = 1777
+; IDE Options = PureBasic 6.01 LTS beta 1 (Windows - x64)
+; CursorPosition = 1
 ; Folding = ---
 ; Optimizer
 ; EnableXP
 ; DPIAware
-; Compiler = PureBasic 6.00 LTS - C Backend (Windows - x64)
+; DisableDebugger
+; Compiler = PureBasic 6.01 LTS beta 1 - C Backend (Windows - x64)
