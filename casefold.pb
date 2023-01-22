@@ -1579,9 +1579,7 @@ Module CaseFolding
             aa >> 16 
             cb+1 
           Wend  
-          If cb > 0 
-            cb-1 
-          EndIf   
+          cb-1 
         EndIf  
         
         If bb > $FFFF 
@@ -1589,9 +1587,7 @@ Module CaseFolding
             bb >> 16 
             ca+1 
           Wend  
-          If ca > 0 
-            ca-1
-          EndIf   
+          ca-1
         EndIf 
       EndIf 
       
@@ -1687,9 +1683,7 @@ Module CaseFolding
             aa >> 16 
             cb+1 
           Wend  
-          If cb > 0 
-            cb-1 
-          EndIf   
+          cb-1 
         EndIf  
         
         If bb > $FFFF 
@@ -1697,9 +1691,7 @@ Module CaseFolding
             bb >> 16 
             ca+1 
           Wend  
-          If ca > 0 
-            ca-1
-          EndIf   
+          ca-1
         EndIf 
       EndIf 
       
@@ -1818,8 +1810,7 @@ CompilerIf #PB_Compiler_IsMainFile
     If StrCmp(sa,sb) 
       Debug "casemapping " + sa + " = " + sb  
     EndIf   
-       
-    
+        
     Global s2.s =  "aSSEai"+Chr($0307)+"dßf"    ;these strings are deemed to be equal with full case folding 
     Global s1.s =  "aßEaİdssf"
         
@@ -1885,8 +1876,8 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 6.00 LTS (Windows - x64)
-; CursorPosition = 1801
-; FirstLine = 1790
+; CursorPosition = 1813
+; FirstLine = 1777
 ; Folding = ---
 ; Optimizer
 ; EnableXP
