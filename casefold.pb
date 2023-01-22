@@ -1798,22 +1798,23 @@ CompilerIf #PB_Compiler_IsMainFile
     
     Global sa.s,sb.s 
     
-    Debug StrCmp(_Chr($00DF), _Chr($1E9E)) ; returns 1
+    Debug StrCmp(_Chr($1FFC), _Chr($1FF3)) ; returns 1
     Debug StrCmp("ß", "ss")   ; returns `1`
     Debug StrCmp("ßz", "ssz") ; returns `1`
     Debug StrCmp("zß", "zss") ; returns `1`
         
     sa = "a" + _Chr($10400) + "abd" 
     sb = "A" + _Chr($10428) + "ABD" 
-       
-    
+        
     If StrCmp(sa,sb) 
       Debug "surrogate pairs " + sa + " = " + sb  
     EndIf   
     
-    sa = "a" + _Chr($00DF) + "abd" 
-    sb = "a" + _Chr($1E9E) + "ABD" 
-    
+    sa = "a" + _Chr($1FFC) + "abd" 
+    sb = "a" + _Chr($1FF3) + "ABD" 
+    ;1FFC; F; 03C9 03B9; # GREEK CAPITAL LETTER OMEGA WITH PROSGEGRAMMENI   
+    ;1FF3; F; 03C9 03B9; # GREEK SMALL LETTER OMEGA WITH YPOGEGRAMMENI
+        
     If StrCmp(sa,sb) 
       Debug "casemapping " + sa + " = " + sb  
     EndIf   
@@ -1884,8 +1885,8 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 6.00 LTS (Windows - x64)
-; CursorPosition = 1819
-; FirstLine = 1782
+; CursorPosition = 1801
+; FirstLine = 1790
 ; Folding = ---
 ; Optimizer
 ; EnableXP
