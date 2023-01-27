@@ -1,5 +1,5 @@
 ﻿DeclareModule CaseFolding 
-  ;casefold.pb v 1.2.9 
+  ;casefold.pb v 1.2.10 
   ;author idle 15/11/22 
   ;license MIT 
   ;Unicode full case folding case insensitive string matching.  
@@ -27,7 +27,7 @@
   ;v1.2.7 fixed bug in _asc function 
   ;v1.2.8 fixed short string bug 
   ;v1.2.9 fixec bug in same case mapping 1st char
-  
+  ;v1.2.10 fixed start of table 
   Structure mappings 
     code.l
     status.u
@@ -147,7 +147,7 @@ Module CaseFolding
       *mp+SizeOf(mappings) 
     Next   
     
-    For a = 41 To $1E921 
+    For a = 0 To $1E921 
       If casemapping(0,a) = 0 
         casemapping(0,a) = a 
       EndIf   
@@ -1876,10 +1876,10 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 6.01 LTS beta 1 (Windows - x64)
-; CursorPosition = 1
+; CursorPosition = 29
+; FirstLine = 12
 ; Folding = ---
 ; Optimizer
 ; EnableXP
 ; DPIAware
-; DisableDebugger
 ; Compiler = PureBasic 6.01 LTS beta 1 - C Backend (Windows - x64)
